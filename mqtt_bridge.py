@@ -110,8 +110,10 @@ def health():
     })
 
 
-# ─── Main ──────────────────────────────────────────────────────
- start_mqtt()
+# ─── Auto-start MQTT on import (for gunicorn / Render) ─────────
+start_mqtt()
+
+# ─── Main (for direct run: python mqtt_bridge.py) ──────────────
 if __name__ == "__main__":
-    print(...)
-    app.run(...)
+    print(f"[Bridge] HTTP → http://0.0.0.0:{HTTP_PORT}", flush=True)
+    app.run(host="0.0.0.0", port=HTTP_PORT, debug=False)
