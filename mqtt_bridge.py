@@ -23,7 +23,7 @@ app = Flask(__name__)
 # ─── Configuration ─────────────────────────────────────────────
 HTTP_PORT = int(os.environ.get("PORT", 5000))
 MQTT_BROKER = os.environ.get("MQTT_BROKER", "broker.hivemq.com")
-MQTT_PORT = int(os.environ.get("MQTT_PORT", 1883))
+MQTT_PORT = int(os.environ.get("MQTT_PORT", 8000))
 
 # ─── Shared state ──────────────────────────────────────────────
 _latest_status = {
@@ -60,7 +60,7 @@ def on_message(client, userdata, msg):
         print(f"[Bridge] MQTT error: {e}", flush=True)
 
 
-mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+mqtt_client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, transport="websockets")
 mqtt_client.on_connect = on_connect
 mqtt_client.on_message = on_message
 
