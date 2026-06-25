@@ -111,7 +111,7 @@ def health():
 
 
 # ─── Main ──────────────────────────────────────────────────────
+ start_mqtt()
 if __name__ == "__main__":
-    start_mqtt()
-    print(f"[Bridge] HTTP → http://0.0.0.0:{HTTP_PORT}", flush=True)
-    app.run(host="0.0.0.0", port=HTTP_PORT, debug=False)
+    print(...)
+    app.run(...)
